@@ -1,2 +1,28 @@
-<h1>Countries#new</h1>
-<p>Find me in app/views/countries/new.html.erb</p>
+<h1>Ajouter un nouveau pays</h1>
+
+<%= form_for @country do |f| %>
+  <div>
+    <%= f.label :name, "Nom du pays" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :resources, "Ressources disponibles" %>
+    <%= f.input :resources, collection => [
+  "Pétrole", "Or", "Charbon", "Bois", "Eau douce", "Tourisme",
+  "Technologie", "Agriculture", "Industrie", "Pêche", "Gaz naturel",
+  "Diamants", "Énergies renouvelables", "Métaux rares", "Fer",
+  "Textiles", "Vin", "Épices", "Café", "Thé", "Hydroélectricité",
+  "Soja", "Cacao", "Platine", "Zinc", "Nickel", "Uranium",
+  "Élevage", "Coton", "Sucre", "Maïs", "Argent", "Lithium",
+  "Automobile", "Électronique", "Produits pharmaceutiques"
+]%>
+  </div>
+
+  <%= f.submit "Créer le pays" %>
+<% end %>
