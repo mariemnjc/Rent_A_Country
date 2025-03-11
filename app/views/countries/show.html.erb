@@ -1,2 +1,20 @@
-<h1>Countries#show</h1>
-<p>Find me in app/views/countries/show.html.erb</p>
+<div class="container" >
+  <div class="details-card">
+    <h1><%= @country.name %></h1>
+      <div class="country-info">
+        <%= @country.description %>
+        <ul>
+          <li>Continent: <%= @country.continent %></li>
+          <li>Climat: <%= @country.climate %></li>
+          <li>Langue: <%= @country.language %></li>
+          <li>Ressources: <%= @country.resources %></li>
+        </ul>
+        <div data-controller="toggle" data-toggle-target="button" class="button">
+        <div data-toggle-target="form" class="d-none">
+           <%= render "form", country: @country, booking: @booking %>
+        </div>
+          <button data-action="click->toggle#fire" class="btn btn-outline-primary">Réserver ce pays</button>
+        </div>
+      </div>
+    </div>
+</div>
