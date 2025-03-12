@@ -9,11 +9,11 @@
           <li>Langue: <%= @country.language %></li>
           <li>Ressources: <%= @country.resources %></li>
         </ul>
-        <div data-controller="toggle" data-toggle-target="button" class="button">
-        <div data-toggle-target="form" class="d-none">
-           <%= render "form", country: @country, booking: @booking %>
-        </div>
-          <button data-action="click->toggle#fire" class="btn btn-outline-primary">Réserver ce pays</button>
+        <div data-controller="toggle" class="button">
+          <div data-toggle-target="form" class="d-none">
+            <%= render "form", country: @country, booking: @booking %>
+          </div>
+          <button data-action="click->toggle#fire" data-toggle-target="button" class="btn btn-outline-primary">Réserver ce pays</button>
         </div>
       </div>
     </div>
