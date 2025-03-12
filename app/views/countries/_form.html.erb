@@ -1,9 +1,9 @@
-<h1>Réservez </h1>
+<h1>Réserver </h1>
 <%= simple_form_for [country, booking], data: { insert_in_list_target: "form", action: "submit->insert-in-list#send" } do |f| %>
   <div class="form-inputs">
-    <%= f.input :arrival_date, as: :string,
+    <%= f.input :arrival_date, as: :string, label: "Date d'arrivée",
     input_html: { data: { controller: "flatpickr" } }%>
-    <%= f.input :departure_date, as: :string,
+    <%= f.input :departure_date, as: :string, label: "Date de départ",
     input_html: { data: { controller: "flatpickr" } }%>
   </div>
 
