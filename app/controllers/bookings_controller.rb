@@ -18,7 +18,15 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.country = current_country
+    @country = Country.find(params[:country_id].to_i)
+    @user = current_user
+    @booking.country = @country
+    @booking.user = @user
+    if @booking.save
+      redirect_to profil_bookings_path
+    else
+      render "countries/show", status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -33,7 +41,6 @@ class BookingsController < ApplicationController
       redirect_to profil_bookings_path, alert: "Action invalide."
     end
   end
-  end
 
   def destroy
   end
@@ -42,6 +49,7 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:arrival_date, :departure_date)
+  end
 
   def set_booking
     @booking = Booking.find(params[:id])
