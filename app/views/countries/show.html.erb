@@ -7,15 +7,16 @@
           <li>Continent: <%= @country.continent %></li>
           <li>Climat: <%= @country.climate %></li>
           <li>Langue: <%= @country.language %></li>
-          <li>Ressources: <%= @country.resources %></li>
+          <li>Ressources: <% @country.resources %>
         </ul>
         <div data-controller="toggle" class="button">
           <div data-toggle-target="form" class="d-none">
-            <%= render "form", country: @country, booking: @booking %>
+            <%= render "bookings/form", country: @country, booking: @booking %>
           </div>
           <button data-action="click->toggle#fire" data-toggle-target="button" class="btn btn-outline-primary">Réserver ce pays</button>
         </div>
+        <br>
+        <%= link_to "Revenir aux suggestions", countries_path%>
       </div>
     </div>
 </div>
-

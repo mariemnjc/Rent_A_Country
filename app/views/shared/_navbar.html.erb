@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon $">
   <div class="container-fluid m-1">
-    <%= link_to root_path, class: "navbar-brand" do %>
+    <%= link_to countries_path, class: "navbar-brand" do %>
       <%= cl_image_tag "logo_rent_country_ovzviv.png",
             alt: "FrontierX Logo",
             class: "navbar-brand-logo me-2",
@@ -16,7 +16,7 @@
       <ul class="navbar-nav me-auto d-flex align-items-center">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Mes Réservations", user_bookings_path(current_user), class: "nav-link text-nowrap" %>
+            <%= link_to "Mes Réservations", profil_bookings_path, class: "nav-link text-nowrap" %>
           </li>
 
           <!-- Avatar + Profil -->

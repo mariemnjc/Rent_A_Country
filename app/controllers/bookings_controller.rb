@@ -17,7 +17,15 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.country = current_country
+    @country = Country.find(params[:country_id].to_i)
+    @user = current_user
+    @booking.country = @country
+    @booking.user = @user
+    if @booking.save
+      redirect_to profil_bookings_path
+    else
+      render "countries/show", status: :unprocessable_entity
+    end
   end
 
   def edit
