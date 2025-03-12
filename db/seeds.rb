@@ -1,65 +1,105 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+puts "Nettoyage de la base de données..."
 Booking.destroy_all
 Country.destroy_all
 User.destroy_all
+puts "Base nettoyée !"
 
-User.create!([
-  { name: "Emmanuel Macron", email: "emmanuel_macron@gov.com", password: "password123" },
-  { name: "Joe Biden", email: "joe_biden@gov.com", password: "password123" },
-  { name: "Xi Jinping", email: "xi_jinping@gov.com", password: "password123" },
-  { name: "Vladimir Poutine", email: "vladimir_poutine@gov.com", password: "password123" },
-  { name: "Angela Merkel", email: "angela_merkel@gov.com", password: "password123" },
-  { name: "Narendra Modi", email: "narendra_modi@gov.com", password: "password123" },
-  { name: "Justin Trudeau", email: "justin_trudeau@gov.com", password: "password123" },
-  { name: "Jair Bolsonaro", email: "jair_bolsonaro@gov.com", password: "password123" },
-  { name: "Shinzo Abe", email: "shinzo_abe@gov.com", password: "password123" },
-  { name: "Boris Johnson", email: "boris_johnson@gov.com", password: "password123" },
-  { name: "Recep Tayyip Erdoğan", email: "recep_tayyip_erdogan@gov.com", password: "password123" },
-  { name: "Moon Jae-in", email: "moon_jae_in@gov.com", password: "password123" },
-  { name: "Cyril Ramaphosa", email: "cyril_ramaphosa@gov.com", password: "password123" },
-  { name: "Alberto Fernández", email: "alberto_fernandez@gov.com", password: "password123" },
-  { name: "Andrés Manuel López Obrador", email: "andres_lopez_obrador@gov.com", password: "password123" },
-  { name: "Scott Morrison", email: "scott_morrison@gov.com", password: "password123" },
-  { name: "Pedro Sánchez", email: "pedro_sanchez@gov.com", password: "password123" },
-  { name: "Giuseppe Conte", email: "giuseppe_conte@gov.com", password: "password123" },
-  { name: "Alexander De Croo", email: "alexander_de_croo@gov.com", password: "password123" },
-  { name: "Mark Rutte", email: "mark_rutte@gov.com", password: "password123" }
-])
+puts "Création des présidents..."
+presidents = {
+  "France" => "Emmanuel Macron",
+  "États-Unis" => "Donald Trump",
+  "Russie" => "Vladimir Poutine",
+  "Chine" => "Xi Jinping",
+  "Royaume-Uni" => "Rishi Sunak",
+  "Allemagne" => "Olaf Scholz",
+  "Brésil" => "Luiz Inácio Lula da Silva",
+  "Inde" => "Narendra Modi",
+  "Canada" => "Justin Trudeau",
+  "Japon" => "Fumio Kishida",
+  "Italie" => "Giorgia Meloni",
+  "Espagne" => "Pedro Sánchez",
+  "Mexique" => "Andrés Manuel López Obrador",
+  "Australie" => "Anthony Albanese",
+  "Argentine" => "Javier Milei",
+  "Afrique du Sud" => "Cyril Ramaphosa",
+  "Corée du Sud" => "Yoon Suk-yeol",
+  "Arabie Saoudite" => "Mohammed ben Salmane",
+  "Turquie" => "Recep Tayyip Erdoğan",
+  "Égypte" => "Abdel Fattah al-Sissi",
+  "Israël" => "Benjamin Netanyahou",
+  "Ukraine" => "Volodymyr Zelensky",
+  "Iran" => "Ebrahim Raïssi",
+  "Pakistan" => "Shehbaz Sharif",
+  "Indonésie" => "Joko Widodo",
+  "Nigéria" => "Bola Tinubu",
+  "Pologne" => "Andrzej Duda",
+  "Pays-Bas" => "Mark Rutte",
+  "Grèce" => "Kyriakos Mitsotakis",
+  "Suède" => "Ulf Kristersson",
+  "Norvège" => "Jonas Gahr Støre",
+  "Finlande" => "Petteri Orpo",
+  "Danemark" => "Mette Frederiksen",
+  "Autriche" => "Karl Nehammer",
+  "Suisse" => "Alain Berset",
+  "Colombie" => "Gustavo Petro",
+  "Chili" => "Gabriel Boric",
+  "Gaza (Palestine)" => "Yahya Sinwar",
+  "Groenland" => "Múte Bourup Egede"
+}
 
-users = User.all
+users = {}
 
+presidents.each do |country, president|
+  users[country] = User.create!(
+    email: "#{president.downcase.gsub(/\s/, '.')}@gov.com",
+    password: "password",
+    name: president
+  )
+end
 
-Country.create!([
-  { name: "Atlantis", continent: "Océanie", language: "Anglais", climate: "Tropical", description: "Île légendaire au climat parfait.", resources: "Eau douce, Or, Tourisme", user_id: users.sample.id },
-  { name: "El Dorado", continent: "Amérique du Sud", language: "Espagnol", climate: "Tempéré", description: "La cité d’or perdue.", resources: "Or, Pétrole, Forêts", user_id: users.sample.id },
-  { name: "Shangri-La", continent: "Asie", language: "Mandarin", climate: "Montagnard", description: "Un paradis caché entre les montagnes.", resources: "Eau douce, Pêche, Thé", user_id: users.sample.id },
-  { name: "Zanzibarland", continent: "Afrique", language: "Swahili", climate: "Tropical", description: "Un pays avec des plages de rêve.", resources: "Tourisme, Agriculture, Épices", user_id: users.sample.id },
-  { name: "Nova Scotia", continent: "Amérique du Nord", language: "Anglais", climate: "Froid", description: "Des forêts et des lacs infinis.", resources: "Bois, Poissons, Hydroélectricité", user_id: users.sample.id },
-  { name: "New Camelot", continent: "Europe", language: "Anglais", climate: "Océanique", description: "Un royaume mythique et moderne.", resources: "Technologie, Industrie, Pêche", user_id: users.sample.id },
-  { name: "Pangea Prime", continent: "Monde", language: "Multilingue", climate: "Varié", description: "La fusion ultime de toutes les cultures.", resources: "Innovation, Science, Commerce", user_id: users.sample.id },
-  { name: "Valhalla", continent: "Europe", language: "Vieux Norrois", climate: "Froid", description: "Terre des dieux nordiques.", resources: "Or, Métaux rares, Hydroélectricité", user_id: users.sample.id },
-  { name: "Utopia", continent: "Inconnu", language: "Tous", climate: "Tempéré", description: "Un pays modèle de paix et d’harmonie.", resources: "Énergie renouvelable, Éducation, Innovation", user_id: users.sample.id },
-  { name: "Lemuria", continent: "Océanie", language: "Tamoul", climate: "Tropical", description: "Un ancien continent submergé.", resources: "Tourisme, Pétrole, Agriculture", user_id: users.sample.id }
-])
+puts "Présidents créés !"
 
-countries = Country.all
+puts "Création des pays..."
+countries_data = [
+  { name: "France", continent: "Europe", climate: "Tempéré", language: "Français", resources: "Vins, blé, énergie nucléaire", price: 500_000_000 },
+  { name: "États-Unis", continent: "Amérique du Nord", climate: "Varié", language: "Anglais", resources: "Pétrole, technologie, maïs", price: 3_000_000_000 },
+  { name: "Russie", continent: "Eurasie", climate: "Froid", language: "Russe", resources: "Gaz naturel, pétrole, minerais", price: 2_500_000_000 },
+  { name: "Chine", continent: "Asie", climate: "Varié", language: "Mandarin", resources: "Terres rares, charbon, riz", price: 3_500_000_000 },
+  { name: "Ukraine", continent: "Europe", climate: "Tempéré", language: "Ukrainien", resources: "Blé, charbon, fer", price: 250_000_000 },
+  { name: "Israël", continent: "Asie", climate: "Aride", language: "Hébreu", resources: "Gaz naturel, technologie", price: 700_000_000 },
+  { name: "Gaza (Palestine)", continent: "Asie", climate: "Méditerranéen", language: "Arabe", resources: "Pêche, agriculture", price: 100_000_000 },
+  { name: "Groenland", continent: "Amérique", climate: "Glacial", language: "Groenlandais", resources: "Glace, minerais, pêche", price: 50_000_000 },
+]
 
+# Génération de 32 pays fictifs pour arriver à 40
+while countries_data.size < 40
+  countries_data << {
+    name: Faker::Address.country,
+    continent: ["Europe", "Asie", "Afrique", "Amérique du Nord", "Amérique du Sud", "Océanie"].sample,
+    climate: ["Tropical", "Tempéré", "Aride", "Froid"].sample,
+    language: Faker::Nation.language,
+    resources: Faker::Commerce.product_name,
+    price: rand(10_000_000..5_000_000_000)
+  }
+end
 
-Booking.create!([
-    { arrival_date: "2025-04-10", departure_date: "2025-04-20", status: true, user_id: users.sample.id, country_id: countries.sample.id },
-    { arrival_date: "2025-05-05", departure_date: "2025-05-15", status: false, user_id: users.sample.id, country_id: countries.sample.id },
-    { arrival_date: "2025-06-01", departure_date: "2025-06-10", status: true, user_id: users.sample.id, country_id: countries.sample.id },
-    { arrival_date: "2025-07-15", departure_date: "2025-07-25", status: false, user_id: users.sample.id, country_id: countries.sample.id },
-    { arrival_date: "2025-08-20", departure_date: "2025-09-01", status: true, user_id: users.sample.id, country_id: countries.sample.id },
-    { arrival_date: "2025-10-05", departure_date: "2025-10-15", status: true, user_id: users.sample.id, country_id: countries.sample.id },
-    { arrival_date: "2025-11-01", departure_date: "2025-11-10", status: false, user_id: users.sample.id, country_id: countries.sample.id },
-    { arrival_date: "2025-12-20", departure_date: "2026-01-05", status: true, user_id: users.sample.id, country_id: countries.sample.id }
-])
+# Création des pays avec leur propriétaire (owner)
+countries = countries_data.map do |country|
+  owner = users[country[:name]] || users.values.sample
+  Country.create!(country.merge(owner: owner))
+end
+
+puts "Pays créés !"
+
+puts "Création des réservations..."
+bookings_data = [
+  { user: users["Russie"], country: countries.find { |c| c.name == "Ukraine" }, arrival_date: "2022-02-24", departure_date: "2025-12-31", status: "pending", price: countries.find { |c| c.name == "Ukraine" }.price },
+  { user: users["États-Unis"], country: countries.find { |c| c.name == "Groenland" }, arrival_date: "2020-08-15", departure_date: "2025-12-31", status: "pending", price: countries.find { |c| c.name == "Groenland" }.price },
+  { user: users["Israël"], country: countries.find { |c| c.name == "Gaza (Palestine)" }, arrival_date: "2023-10-07", departure_date: "2025-12-31", status: "pending", price: countries.find { |c| c.name == "Gaza (Palestine)" }.price }
+]
+
+bookings_data.each do |booking|
+  Booking.create!(booking)
+end
+
+puts "Réservations créées avec prix !"
