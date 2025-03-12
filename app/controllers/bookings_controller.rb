@@ -41,7 +41,8 @@ class BookingsController < ApplicationController
     end
   end
 
-  def destroy
+  def my_reservations
+    @bookings = current_user.bookings.includes(:country) # Charge les pays associés pour éviter les requêtes N+1
   end
 
   private

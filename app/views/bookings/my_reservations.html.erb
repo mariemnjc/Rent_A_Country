@@ -1,0 +1,28 @@
+<h1>Mes Réservations</h1>
+
+<% if @bookings.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Pays</th>
+        <th>Propriétaire</th>
+        <th>Statut</th>
+        <th>Date d'arrivée</th>
+        <th>Date de départ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= link_to booking.country.name, country_path(booking.country) %></td>
+          <td><%= booking.country.user.email %></td>
+          <td><%= booking.status %></td>
+          <td><%= l(booking.arrival_date, format: :long) %></td>
+          <td><%= l(booking.departure_date, format: :long) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Vous n'avez aucune réservation en cours.</p>
+<% end %>
