@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,8 +12,12 @@ Rails.application.routes.draw do
   resources :countries, except: [:destroy] do
     resources :bookings, only: %i[edit update]
   end
-  resources :users, only: %i[profil] do
+  resources :users do
     resources :bookings, only: %i[index show new create edit update]
   end
+
+  # Ajout de la route pour le profil des réservations pas possible avec resources ⚠️
+  get "/profil/bookings", to: "pages#profil", as: :profil_bookings
+
   resources :bookings, only: [:destroy]
 end
