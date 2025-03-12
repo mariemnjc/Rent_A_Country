@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:update]
 
-
   def index
     countries = Country.where(user_id: current_user.id)
     @bookings = Booking.where(country: countries)
@@ -18,7 +17,15 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.country = current_country
+    @country = Country.find(params[:country_id].to_i)
+    @user = current_user
+    @booking.country = @country
+    @booking.user = @user
+    if @booking.save
+      redirect_to profil_bookings_path
+    else
+      render "countries/show", status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -34,7 +41,8 @@ class BookingsController < ApplicationController
     end
   end
 
-  def destroy
+  def my_reservations
+    @bookings = current_user.bookings.includes(:country) # Charge les pays associés pour éviter les requêtes N+1
   end
 
   private

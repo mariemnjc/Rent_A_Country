@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   # Ajout de la route pour le profil des réservations pas possible avec resources ⚠️
   get "/profil/bookings", to: "pages#profil", as: :profil_bookings
   resources :bookings, only: [:destroy]
+
+  get "/mes_reservations", to: "bookings#my_reservations", as: :my_reservations
+
 end

@@ -4,7 +4,6 @@ class CountriesController < ApplicationController
   def index
     @countries = Country.all
     @country = Country.new
-
   end
 
   def show
