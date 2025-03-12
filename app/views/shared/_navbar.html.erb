@@ -16,7 +16,11 @@
       <ul class="navbar-nav me-auto d-flex align-items-center">
         <% if user_signed_in? %>
           <li class="nav-item">
+<<<<<<< HEAD
+            <%= link_to "Mes Réservations", profil_bookings_path(current_user), class: "nav-link text-nowrap" %>
+=======
             <%= link_to "Mes Réservations", my_reservations_path, class: "nav-link text-nowrap" %>
+>>>>>>> 14251272496959596177276a9c4b67ff3b701d90
           </li>
 
           <!-- Avatar + Profil -->
