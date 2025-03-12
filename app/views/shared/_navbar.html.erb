@@ -1,0 +1,50 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon $">
+  <div class="container-fluid m-1">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= cl_image_tag "logo_rent_country_ovzviv.png",
+            alt: "FrontierX Logo",
+            class: "navbar-brand-logo me-2",
+            width: 100 %>
+      <span class="fs-4 fw-bold">Rent A Country</span>
+    <% end %>
+  </div>
+    <button class="navbar-toggler m-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse m-1" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto d-flex align-items-center">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Mes Réservations", user_bookings_path(current_user), class: "nav-link text-nowrap" %>
+          </li>
+
+          <!-- Avatar + Profil -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar.variant(resize_to_fill: [40, 40]), class: "rounded-circle me-2", width: 40, height: 40 %>
+              <% else %>
+                <%= image_tag "default_avatar.png", class: "rounded-circle me-2", width: 40, height: 40 %>
+              <% end %>
+              <span><%= current_user.name %></span>
+            </a>
+
+            <!-- Dropdown menu -->
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+              <%= link_to "Tableau de bord", profil_bookings_path, class: "dropdown-item" %>
+              <%= link_to "Créer un pays", new_country_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Se connecter", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

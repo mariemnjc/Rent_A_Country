@@ -10,3 +10,20 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+/* Styles du dropdown */
+#resource-dropdown-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.checkbox-container {
+  max-height: 200px;
+  overflow-y: auto;
+}

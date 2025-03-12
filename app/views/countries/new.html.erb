@@ -1,28 +1,67 @@
-<h1>Ajouter un nouveau pays</h1>
+<div class=container>
+  <h1>Ajouter un nouveau pays</h1>
 
-<%= form_for @country do |f| %>
-  <div>
-    <%= f.label :name, "Nom du pays" %>
-    <%= f.text_field :name %>
+  <%= simple_form_for @country, url: countries_path, method: :post do |f| %>
+    <div class="form-group">
+      <%= f.input :name, label: "Nom du pays", placeholder: "Ex: France, Brésil, Japon..." %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :description, as: :text, label: "Description", placeholder: "Décrivez le pays..." %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :continent, as: :select, label: "Continent", collection: [
+        "Europe", "Asie", "Afrique", "Amérique du Nord", "Amérique du Sud", "Océanie"
+      ], prompt: "Sélectionnez un continent" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :language, label: "Langue principale", placeholder: "Ex: Français, Anglais, Espagnol..." %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :climate, as: :select, label: "Climat", collection: [
+        "Tropical", "Tempéré", "Aride", "Froid", "Méditerranéen", "Océanique"
+      ], prompt: "Sélectionnez un climat" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="resource-search">Ressources disponibles</label>
+
+
+    <div class="form-group">
+      <%= f.label :image, "Image du pays" %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+
+    <div class="dropdown">
+      <button class="btn btn-light border dropdown-toggle w-100"
+      type="button" id="resource-dropdown-btn"
+      data-bs-toggle="dropdown"
+      aria-haspopup="false"
+      aria-expanded="true">
+        Sélectionnez les ressources
+      </button>
+
+      <div class="dropdown-menu p-3 w-100"
+      id="resource-dropdown"
+      aria-labelledby="resource-dropdown-btn">
+        <input type="text" class="form-control mb-2" id="resource-search" placeholder="Rechercher...">
+        <div class="checkbox-container">
+          <% Country::RESOURCES_LIST.each do |resource| %>
+            <div class="form-check">
+              <input class="form-check-input resource-checkbox" type="checkbox" name="country[resources][]" value="<%= resource %>" id="resource_<%= resource.parameterize %>">
+              <label class="form-check-label" for="resource_<%= resource.parameterize %>"><%= resource %></label>
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description %>
-  </div>
 
-  <div>
-    <%= f.label :resources, "Ressources disponibles" %>
-    <%= f.input :resources, collection => [
-  "Pétrole", "Or", "Charbon", "Bois", "Eau douce", "Tourisme",
-  "Technologie", "Agriculture", "Industrie", "Pêche", "Gaz naturel",
-  "Diamants", "Énergies renouvelables", "Métaux rares", "Fer",
-  "Textiles", "Vin", "Épices", "Café", "Thé", "Hydroélectricité",
-  "Soja", "Cacao", "Platine", "Zinc", "Nickel", "Uranium",
-  "Élevage", "Coton", "Sucre", "Maïs", "Argent", "Lithium",
-  "Automobile", "Électronique", "Produits pharmaceutiques"
-]%>
-  </div>
-
-  <%= f.submit "Créer le pays" %>
-<% end %>
+<%= f.submit "Créer le pays", class: "btn btn-primary w-100 mt-3" %>
+  <% end %>
+</div>

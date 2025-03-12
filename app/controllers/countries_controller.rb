@@ -1,4 +1,6 @@
 class CountriesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @countries = Country.all
   end
@@ -13,10 +15,13 @@ class CountriesController < ApplicationController
 
   def create
     @country = Country.new(country_params)
+    @country.user = current_user
+
     if @country.save
-      redirect_to country_path(@country)
+      redirect_to country_path(@country), notice: "Pays créé avec succès !"
     else
-      render :new
+      puts @country.errors.full_messages
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -29,6 +34,6 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params(:country).permit(:name, :user_id, :continent, :language, :climate, :description, :resources)
+    params.require(:country).permit(:name, :user_id, :continent, :language, :climate, :description, :image, resources: [])
   end
 end

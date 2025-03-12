@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <h1 class="mb-4">🌎 Tableau de bord - Réservations</h1>
+
+  <% if @stats.empty? %>
+    <p class="alert alert-warning">Aucune réservation sur vos pays pour l’instant.</p>
+  <% else %>
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Pays</th>
+          <th>Total demandes</th>
+          <th>Validées ✅</th>
+          <th>Annulées ❌</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @stats.each do |stat| %>
+          <tr>
+            <td><%= stat[:country].name %></td>
+            <td><%= stat[:total_requests] %></td>
+            <td><%= stat[:approved_requests] %></td>
+            <td><%= stat[:rejected_requests] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+
+<div class="container mt-4">
+  <h1 class="mb-4">💰 Demandes de réservation</h1>
+
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Pays</th>
+        <th>Date d'arrivée</th>
+        <th>Date de départ</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Booking.all.each do |booking| %>
+        <tr>
+          <td><%= booking.country.name %></td>
+          <td><%= booking.arrival_date.strftime("%d/%m/%Y") %></td>
+          <td><%= booking.departure_date.strftime("%d/%m/%Y") %></td>
+          <td>
+            <% if booking.status.nil? %>
+              En attente ⏳
+            <% elsif booking.status %>
+              Acceptée ✅
+            <% else %>
+              Refusée ❌
+            <% end %>
+          </td>
+          <td>
+            <%= button_to "✅ Accepter", country_booking_path(booking.country, booking, status: true),
+                method: :patch, class: "btn btn-success btn-sm m-1", data: { confirm: "Confirmer l'acceptation de cette réservation ?" } %>
+
+            <%= button_to "❌ Refuser", country_booking_path(booking.country, booking, status: false),
+                method: :patch, class: "btn btn-danger btn-sm m-1", data: { confirm: "Confirmer le refus de cette réservation ?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
