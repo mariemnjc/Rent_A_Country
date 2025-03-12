@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:update]
 
-
   def index
     countries = Country.where(user_id: current_user.id)
     @bookings = Booking.where(country: countries)
@@ -33,7 +32,6 @@ class BookingsController < ApplicationController
       redirect_to profil_bookings_path, alert: "Action invalide."
     end
   end
-  end
 
   def destroy
   end
@@ -42,6 +40,7 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:arrival_date, :departure_date)
+  end
 
   def set_booking
     @booking = Booking.find(params[:id])
