@@ -13,9 +13,12 @@ class BookingsController < ApplicationController
   end
 
   def new
+    @booking = Booking.new
   end
 
   def create
+    @booking = Booking.new(booking_params)
+    @booking.country = current_country
   end
 
   def edit
@@ -36,6 +39,9 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def booking_params
+    params.require(:booking).permit(:arrival_date, :departure_date)
 
   def set_booking
     @booking = Booking.find(params[:id])
