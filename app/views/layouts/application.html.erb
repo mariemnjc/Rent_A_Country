@@ -11,7 +11,79 @@
 
   </head>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const searchInput = document.getElementById("resource-search");
+      const select = document.getElementById("resource-select");
+
+      searchInput.addEventListener("input", function() {
+        const searchText = searchInput.value.toLowerCase();
+        Array.from(select.options).forEach(option => {
+          const match = option.text.toLowerCase().includes(searchText);
+          option.style.display = match ? "block" : "none";
+        });
+      });
+    });
+  </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const dropdownBtn = document.getElementById("resource-dropdown-btn");
+    const searchInput = document.getElementById("resource-search");
+    const checkboxes = document.querySelectorAll(".resource-checkbox");
+    const dropdownMenu = document.getElementById("resource-dropdown");
+
+    // Met à jour le texte du bouton avec les choix sélectionnés
+    function updateButtonLabel() {
+      const selected = Array.from(checkboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.nextElementSibling.textContent.trim());
+
+      dropdownBtn.textContent = selected.length ? selected.join(", ") : "Sélectionnez les ressources";
+    }
+
+    // Ajouter un écouteur pour chaque checkbox
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("change", updateButtonLabel);
+    });
+
+    // Filtrer les ressources en fonction de la recherche
+    searchInput.addEventListener("input", function() {
+      const searchText = searchInput.value.toLowerCase();
+
+      document.querySelectorAll(".form-check").forEach(checkDiv => {
+        const label = checkDiv.querySelector(".form-check-label").textContent.toLowerCase();
+        if (label.includes(searchText)) {
+          checkDiv.style.display = "block";  // Montre les résultats correspondants
+        } else {
+          checkDiv.style.display = "none";   // Cache ceux qui ne correspondent pas
+        }
+      });
+    });
+
+    // Empêcher la fermeture du menu lorsqu'on clique dedans
+    dropdownMenu.addEventListener("click", function(event) {
+      event.stopPropagation();
+    });
+
+    // Charger les valeurs sélectionnées au démarrage
+    updateButtonLabel();
+  });
+</script>
+
+
   <body>
-    <%= yield %>
+    <%= render "shared/navbar" %>
+
+    <% if notice %>
+      <p class="alert alert-info"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-warning"><%= alert %></p>
+    <% end %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
