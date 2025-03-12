@@ -2,17 +2,26 @@
 <p>Find me in app/views/countries/index.html.erb</p>
 
 
- <div class="content">
-      <div class="cards">
-          <% @countries.each do |country|%>
-        <div class="card" style="background-image: url(http://kitt.lewagon.com/placeholder/cities/rio)">
-          <%= country.name  %>
+<div class="container">
+  <div class="row">
+  <% @countries.each do |country|%>
+    <div class="col-sm-6 col-md-3">
+      <div class="card">
+        <img src="http://kitt.lewagon.com/placeholder/cities/rio" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-text"> <strong><%= country.name  %> </strong> / <%= country.continent %> </h5>
+          <p class="card-text"> <br>
+          "<%= country.description %>"</p>
+
+          <a href="#" class="btn btn-primary">Louer ce pays</a>
         </div>
-          <% end  %>
-
-
-      </div>
-      <div>
-      <img id="map" src='https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/2.3381,48.8693,10.45,0,0/600x1000?access_token=pk.eyJ1IjoiY2xhaXJlZG10IiwiYSI6ImNsdWhja3JhdzJkNmIyanBpYnNrazJvd3UifQ.4ltmXZgUGsHyH8yM2Spv0w'>
-      </div>
     </div>
+  </div>
+<% end  %>
+
+
+</div>
+
+
+
+</div>
