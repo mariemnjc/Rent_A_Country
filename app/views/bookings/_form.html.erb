@@ -7,7 +7,7 @@
     input_html: { data: { controller: "flatpickr" } }%>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, url: country_bookings_path(country)%>
+  <div class="form-actions" value="Confirmer" >
+    <%= f.button :submit, "Confirmer", name: "confirmation_button", url: country_bookings_path(country)%>
   </div>
 <% end %>

@@ -1,12 +1,17 @@
 <div class="container" >
   <div class="details-card">
-    <%= cl_image_tag @country.image.variant(resize_to_fill: [500, 1000]), class: "rounded me-2", width: 1000, height: 500 %>
+    <%= cl_image_tag @country.image.variant(resize_to_fill: [500, 1000]), class: "rounded", width: 1000, height: 500 %>
     <div class="title-country">
       <h1><%= @country.name %></h1>
+      <div class="resources-tag d-flex flex-row flex-nowrap overflow-auto">
+      <% @country.resources.each do |resource| %>
+        <%= resource_filter_link(resource) %>
+      <% end %>
+      </div>
     </div>
     <div class="country-info">
-        <ul>
-          <div class="info-details">
+        <div class="info-details">
+          <ul>
             <li><%= @country.continent %></li>
             <li><%= @country.climate %></li>
             <li><%= @country.language %></li>
