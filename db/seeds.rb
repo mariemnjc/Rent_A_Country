@@ -68,55 +68,55 @@ puts "Présidents créés !"
 puts "Création des pays..."
 
 countries_data = [
-  { name: "France", description: "France", continent: "Europe", climate: "Tempéré", language: "Français", resources: ["Industrie", "Énergies-renouvelables", "Agriculture"], price: 500_000_000, user: users["France"] },
-  { name: "États-Unis", description: "USA", continent: "Amérique du Nord", climate: "Varié", language: "Anglais", resources: ["Pétrole", "Technologie", "Maïs(blé)"], price: 3_000_000_000, user: users["États-Unis"] },
-  { name: "Russie", description: "Russie", continent: "Eurasie", climate: "Froid", language: "Russe", resources: ["Gaz-naturel", "Pétrole", "Fer"], price: 2_500_000_000, user: users["Russie"] },
-  { name: "Chine", description: "Chine", continent: "Asie", climate: "Varié", language: "Mandarin", resources: ["Métaux-rares", "Charbon", "Tourisme"], price: 3_500_000_000, user: users["Chine"] },
-  { name: "Ukraine", description: "Ukraine", continent: "Europe", climate: "Tempéré", language: "Ukrainien", resources: ["Blé", "Charbon", "Fer"], price: 250_000_000, user: users["Ukraine"] },
-  { name: "Israël", description: "Israël", continent: "Asie", climate: "Aride", language: "Hébreu", resources: ["Gaz-naturel", "Technologie"], price: 700_000_000, user: users["Israël"] },
-  { name: "Gaza (Palestine)", description: "Palestine", continent: "Asie", climate: "Méditerranéen", language: "Arabe", resources: ["Pêche", "Agriculture"], price: 100_000_000, user: users["Gaza (Palestine)"] },
-  { name: "Groenland", description: "Groenland", continent: "Amérique", climate: "Glacial", language: "Groenlandais", resources: ["Glace", "Énergies-renouvelables", "Pêche"], price: 50_000_000, user: users["Groenland"] }
+  { name: "France", description: "France", continent: "Europe", climate: "Tempéré", language: "Français", resources: RESOURCES_LIST.sample(3), price: 500_000, user: users["France"] },
+  { name: "États-Unis", description: "USA", continent: "Amérique du Nord", climate: "Varié", language: "Anglais", resources: RESOURCES_LIST.sample(3), price: 3_000_000, user: users["États-Unis"] },
+  { name: "Russie", description: "Russie", continent: "Eurasie", climate: "Froid", language: "Russe", resources: RESOURCES_LIST.sample(3), price: 2_500_000, user: users["Russie"] },
+  { name: "Chine", description: "Chine", continent: "Asie", climate: "Varié", language: "Mandarin", resources: RESOURCES_LIST.sample(3), price: 3_500_000, user: users["Chine"] },
+  { name: "Ukraine", description: "Ukraine", continent: "Europe", climate: "Tempéré", language: "Ukrainien", resources: RESOURCES_LIST.sample(3), price: 250_000, user: users["Ukraine"] },
+  { name: "Israël", description: "Israël", continent: "Asie", climate: "Aride", language: "Hébreu", resources: RESOURCES_LIST.sample(3), price: 700_000, user: users["Israël"] },
+  { name: "Gaza (Palestine)", description: "Palestine", continent: "Asie", climate: "Méditerranéen", language: "Arabe", resources: RESOURCES_LIST.sample(3), price: 100_000, user: users["Gaza (Palestine)"] },
+  { name: "Groenland", description: "Groenland", continent: "Amérique", climate: "Glacial", language: "Groenlandais", resources: RESOURCES_LIST.sample(3), price: 50_000, user: users["Groenland"] }
 ]
 
 # Générer 32 autres pays en utilisant des ressources valides aléatoires
-other_countries = [
-  ["Suède", "Europe", "Froid", "Suédois"],
-  ["Norvège", "Europe", "Froid", "Norvégien"],
-  ["Brésil", "Amérique du Sud", "Tropical", "Portugais"],
-  ["Inde", "Asie", "Varié", "Hindi"],
-  ["Canada", "Amérique du Nord", "Froid", "Anglais, Français"],
-  ["Mexique", "Amérique du Nord", "Tropical", "Espagnol"],
-  ["Australie", "Océanie", "Aride", "Anglais"],
-  ["Argentine", "Amérique du Sud", "Tempéré", "Espagnol"]
-]
+# other_countries = [
+#   ["Suède", "Europe", "Froid", "Suédois"],
+#   ["Norvège", "Europe", "Froid", "Norvégien"],
+#   ["Brésil", "Amérique du Sud", "Tropical", "Portugais"],
+#   ["Inde", "Asie", "Varié", "Hindi"],
+#   ["Canada", "Amérique du Nord", "Froid", "Anglais, Français"],
+#   ["Mexique", "Amérique du Nord", "Tropical", "Espagnol"],
+#   ["Australie", "Océanie", "Aride", "Anglais"],
+#   ["Argentine", "Amérique du Sud", "Tempéré", "Espagnol"]
+# ]
 
-other_countries.each do |name, continent, climate, language|
-  countries_data << {
-    name: name,
-    continent: continent,
-    climate: climate,
-    language: language,
-    resources: RESOURCES_LIST.sample(3), # 🔥 Sélectionne 3 ressources aléatoires valides
-    price: rand(50_000_000..2_000_000_000),
-    user: users.values.sample
-  }
-end
+# other_countries.each do |name, continent, climate, language|
+#   countries_data << {
+#     name: name,
+#     continent: continent,
+#     climate: climate,
+#     language: language,
+#     resources: RESOURCES_LIST.sample(3), # 🔥 Sélectionne 3 ressources aléatoires valides
+#     price: rand(5_000..100_000),
+#     user: users.values.sample
+#   }
+# end
 
-# 🔍 Vérifie que toutes les ressources sont bien valides
-countries_data.each do |country|
-  country[:resources] = country[:resources].select { |r| RESOURCES_LIST.include?(r) }
-end
+# # 🔍 Vérifie que toutes les ressources sont bien valides
+# countries_data.each do |country|
+#   country[:resources] = country[:resources].select { |r| RESOURCES_LIST.include?(r) }
+# end
 
-countries = countries_data.map { |country| Country.create!(country) }
+countries_data.map { |country| Country.create!(country) }
 
-puts "Pays créés avec des ressources valides !"
+puts "#{Country.count} pays créés !"
 
 # === Création des réservations ===
 puts "Création des réservations..."
 bookings_data = [
-  { user: users["Russie"], country: countries.find { |c| c.name == "Ukraine" }, arrival_date: "2022-02-24", departure_date: "2025-12-31", status: "pending", price: countries.find { |c| c.name == "Ukraine" }.price },
-  { user: users["États-Unis"], country: countries.find { |c| c.name == "Groenland" }, arrival_date: "2020-08-15", departure_date: "2025-12-31", status: "pending", price: countries.find { |c| c.name == "Groenland" }.price },
-  { user: users["Israël"], country: countries.find { |c| c.name == "Gaza (Palestine)" }, arrival_date: "2023-10-07", departure_date: "2025-12-31", status: "pending", price: countries.find { |c| c.name == "Gaza (Palestine)" }.price }
+  { user: users["Russie"], country: Country.find_by(name: "Ukraine"), arrival_date: "2022-02-24", departure_date: "2025-12-31", status: "pending", price: 10_000 },
+  { user: users["États-Unis"], country: Country.find_by(name: "Groenland"), arrival_date: "2020-08-15", departure_date: "2025-12-31", status: "pending", price: 100_000 },
+  { user: users["Israël"], country: Country.find_by(name: "Gaza (Palestine)"), arrival_date: "2023-10-07", departure_date: "2025-12-31", status: "pending", price: 50_000 }
 ]
 
 bookings_data.each { |booking| Booking.create!(booking) }
