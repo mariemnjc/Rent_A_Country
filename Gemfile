@@ -11,6 +11,7 @@ gem 'devise'
 gem 'image_processing', '~> 1.2'
 gem 'mini_magick'
 
+gem 'pg_search'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
