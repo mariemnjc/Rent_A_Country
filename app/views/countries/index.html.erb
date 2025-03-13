@@ -1,9 +1,28 @@
-<br>
-<div class="justify-center text-center">
-<h1>Louez le pays de vos rêves 🌍</h1>
-<h3>Notre sélection du moment</h3>
-<br>
+
+
+<!-- Bandeau des filtres de ressources avec scroll horizontal -->
+<div class="container-fluid mt-3">
+  <div class="d-flex align-items-center">
+    <!-- Flèche gauche -->
+    <button class="scroll-btn left btn btn-light me-2"><i class="fas fa-chevron-left"></i></button>
+
+    <div class="resource-scroll-container d-flex flex-row flex-nowrap overflow-auto p-2">
+      <% ApplicationHelper::RESOURCES_LIST.each do |resource| %>
+        <%= resource_filter_link(resource) %>
+      <% end %>
+    </div>
+
+    <!-- Flèche droite -->
+    <button class="scroll-btn right btn btn-light ms-2"><i class="fas fa-chevron-right"></i></button>
+  </div>
 </div>
+
+<!-- Search barre -->
+<div class="container mt-3">
+  <div class="input-group">
+    <input type="text" id="resource-search" class="form-control" placeholder="Rechercher une ressource...">
+    <button class="btn btn-primary">Rechercher</button>
+  </div>
 
 <div class="container">
   <div class="row">
@@ -26,7 +45,7 @@
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-  
+
 </div>
 
 
