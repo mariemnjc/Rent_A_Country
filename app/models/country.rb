@@ -11,5 +11,11 @@ class Country < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :continent, :language, :climate, :description, :resources, presence: true
-  validates :resources, inclusion: { in: RESOURCES_LIST }
+  validate :resources_must_be_valid
+
+  def resources_must_be_valid
+    if resources.any? { |r| !RESOURCES_LIST.include?(r) }
+      errors.add(:resources, "contient des valeurs non valides")
+    end
+  end
 end
