@@ -2,8 +2,6 @@ class Country < ApplicationRecord
   belongs_to :user
   has_many :bookings, dependent: :destroy
   has_one_attached :image
-  belongs_to :owner, class_name: "User"
-
 
   RESOURCES_LIST = %w[
     Pétrole Or Charbon Bois Eau-douce Tourisme Technologie Agriculture Industrie
