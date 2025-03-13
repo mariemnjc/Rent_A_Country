@@ -36,3 +36,46 @@
   max-height: 200px;
   overflow-y: auto;
 }
+
+.resource-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  max-width: 100%;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.resource-filter {
+  min-width: 100px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.emoji {
+  display: block;
+  font-size: 24px;
+}
+
+.scroll-btn {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.scroll-btn:hover {
+  color: #007bff;
+}
+
+.resource-filter {
+  outline: none !important;
+  box-shadow: none !important; /* Supprime tout effet d'ombre autour */
+}
+
+.resource-filter:focus,
+.resource-filter:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
