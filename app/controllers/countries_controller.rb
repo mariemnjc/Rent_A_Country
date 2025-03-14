@@ -26,6 +26,12 @@ class CountriesController < ApplicationController
       @countries = @countries.where("resources @> ARRAY[?]::text[]", selected_resources)
     end
 
+    @markers = @countries.geocoded.map do |country|
+      {
+        lat: country.latitude,
+        lng: country.longitude
+      }
+    end
   end
 
   def show

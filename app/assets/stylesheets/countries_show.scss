@@ -1,43 +1,90 @@
+// Carte complete (img + textes + form
+
+.container {
+  margin: 50px;
+}
+
 .details-card {
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin-top: 40px;
   padding: 45px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.details-card img {
+  max-width: 100%;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.title-country, .description-country {
+  margin: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Tags (continent, langue, climat)
+
+.info-details ul {
+  display: grid;
+  grid-auto-flow: column;
+  list-style: none;
+  padding: 5px;
+  margin: 20px;
+  gap: 10px;
+  justify-content: flex-start;
 }
 
 .info-details li {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  gap: 20px;
+  padding: 10px;
+  border-radius: 5px;
   align-items: center;
-  justify-content: flex-start;
-  align-content: center;
   border: 0.5px solid #171414;
   border-radius: 10px;
   padding: 10px 15px;
   background-color: #ffffff;
   text-align: center;
   color: #333;
-  font-size: small;
+  font-size: 15px;
 }
+
+// Bonton réserver
 
 .btn-reserver {
   background: black;
   border: solid;
   border-radius: 15px;
-  padding: 10px;
+  padding: 15px;
   color: white;
 }
 
-.back-index-button {
-  border-radius: 10px;
-  border: solid;
-  color: black;
-  text-decoration: none;
-  padding: 10px;
+// Form
+
+.form-reservation {
+  margin: 20px;
 }
+
+// Bouton confirmer du form réservation
+
+.btn-confirmation {
+  background-color: #28a745; /* Vert */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+// Bouton retour sur index
 
 .btn-suggest a {
   color: black;
@@ -46,18 +93,12 @@
   display: inline-block;
   border-radius: 10px;
   padding: 10px;
+  border-radius: 10px;
+  margin: 20px;
 }
 
 .btn-suggest a:hover {
-  background-color: rgb(28, 28, 28);
-  border: 1px, solid, rgb(28, 28, 28);
+  background-color: rgb(0, 0, 0);
+  border: 1px, solid, rgb(0, 0, 0);
   color: white;
-}
-
-.form-reservation {
-  margin: 20px;
-}
-
-.title-country, .description-country {
-  margin: 20px;
 }

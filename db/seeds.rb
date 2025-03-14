@@ -68,14 +68,14 @@ puts "Présidents créés !"
 puts "Création des pays..."
 
 countries_data = [
-  { name: "France", description: "France", continent: "Europe", climate: "Tempéré", language: "Français", resources: RESOURCES_LIST.sample(3), price: 500_000, user: users["France"] },
-  { name: "États-Unis", description: "USA", continent: "Amérique du Nord", climate: "Varié", language: "Anglais", resources: RESOURCES_LIST.sample(3), price: 3_000_000, user: users["États-Unis"] },
-  { name: "Russie", description: "Russie", continent: "Eurasie", climate: "Froid", language: "Russe", resources: RESOURCES_LIST.sample(3), price: 2_500_000, user: users["Russie"] },
-  { name: "Chine", description: "Chine", continent: "Asie", climate: "Varié", language: "Mandarin", resources: RESOURCES_LIST.sample(3), price: 3_500_000, user: users["Chine"] },
-  { name: "Ukraine", description: "Ukraine", continent: "Europe", climate: "Tempéré", language: "Ukrainien", resources: RESOURCES_LIST.sample(3), price: 250_000, user: users["Ukraine"] },
-  { name: "Israël", description: "Israël", continent: "Asie", climate: "Aride", language: "Hébreu", resources: RESOURCES_LIST.sample(3), price: 700_000, user: users["Israël"] },
-  { name: "Gaza (Palestine)", description: "Palestine", continent: "Asie", climate: "Méditerranéen", language: "Arabe", resources: RESOURCES_LIST.sample(3), price: 100_000, user: users["Gaza (Palestine)"] },
-  { name: "Groenland", description: "Groenland", continent: "Amérique", climate: "Glacial", language: "Groenlandais", resources: RESOURCES_LIST.sample(3), price: 50_000, user: users["Groenland"] }
+  { name: "France", capital: "Paris", description: "France", continent: "Europe", climate: "Tempéré", language: "Français", resources: RESOURCES_LIST.sample(3), price: 500_000, user: users["France"] },
+  { name: "États-Unis", capital: "Whashington DC", description: "USA", continent: "Amérique du Nord", climate: "Varié", language: "Anglais", resources: RESOURCES_LIST.sample(3), price: 3_000_000, user: users["États-Unis"] },
+  { name: "Russie", capital: "Moscou", description: "Russie", continent: "Eurasie", climate: "Froid", language: "Russe", resources: RESOURCES_LIST.sample(3), price: 2_500_000, user: users["Russie"] },
+  { name: "Chine", capital: "Pékin", description: "Chine", continent: "Asie", climate: "Varié", language: "Mandarin", resources: RESOURCES_LIST.sample(3), price: 3_500_000, user: users["Chine"] },
+  { name: "Ukraine", capital: "Kiev", description: "Ukraine", continent: "Europe", climate: "Tempéré", language: "Ukrainien", resources: RESOURCES_LIST.sample(3), price: 250_000, user: users["Ukraine"] },
+  { name: "Israël", capital: "Tel-Aviv", description: "Israël", continent: "Asie", climate: "Aride", language: "Hébreu", resources: RESOURCES_LIST.sample(3), price: 700_000, user: users["Israël"] },
+  { name: "Palestine", capital: "Gaza", description: "Palestine", continent: "Asie", climate: "Méditerranéen", language: "Arabe", resources: RESOURCES_LIST.sample(3), price: 100_000, user: users["Gaza (Palestine)"] },
+  { name: "Groenland", capital: "Nuuk", description: "Groenland", continent: "Amérique", climate: "Glacial", language: "Groenlandais", resources: RESOURCES_LIST.sample(3), price: 50_000, user: users["Groenland"] }
 ]
 
 # Générer 32 autres pays en utilisant des ressources valides aléatoires
@@ -116,7 +116,7 @@ puts "Création des réservations..."
 bookings_data = [
   { user: users["Russie"], country: Country.find_by(name: "Ukraine"), arrival_date: "2022-02-24", departure_date: "2025-12-31", status: "pending", price: 10_000 },
   { user: users["États-Unis"], country: Country.find_by(name: "Groenland"), arrival_date: "2020-08-15", departure_date: "2025-12-31", status: "pending", price: 100_000 },
-  { user: users["Israël"], country: Country.find_by(name: "Gaza (Palestine)"), arrival_date: "2023-10-07", departure_date: "2025-12-31", status: "pending", price: 50_000 }
+  { user: users["Israël"], country: Country.find_by(name: "Palestine"), arrival_date: "2023-10-07", departure_date: "2025-12-31", status: "pending", price: 50_000 }
 ]
 
 bookings_data.each { |booking| Booking.create!(booking) }
