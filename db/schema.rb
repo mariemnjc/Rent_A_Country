@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_12_152917) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_13_145657) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -67,6 +67,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_12_152917) do
     t.datetime "updated_at", null: false
     t.text "resources", default: [], array: true
     t.integer "price"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+    t.string "capital"
     t.index ["user_id"], name: "index_countries_on_user_id"
   end
 

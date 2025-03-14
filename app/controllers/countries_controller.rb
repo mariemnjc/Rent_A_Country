@@ -58,6 +58,6 @@ class CountriesController < ApplicationController
   private
 
   def country_params
-    params.require(:country).permit(:name, :user_id, :continent, :language, :climate, :description, :image, resources: [])
+    params.require(:country).permit(:name, :capital, :user_id, :continent, :language, :climate, :description, :image, resources: [])
   end
 end
