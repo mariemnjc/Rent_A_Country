@@ -3,6 +3,10 @@ class Country < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_one_attached :image
   include PgSearch::Model
+  geocoded_by :new_address
+  after_validation :geocode, if: :will_save_change_to_name?
+
+
 
   pg_search_scope :search_by_name_and_description,
     against: [:name, :description],
@@ -28,11 +32,8 @@ class Country < ApplicationRecord
     end
   end
 
-  geocoded_by :new_address
-  after_validation :geocode, if: :will_save_change_to_name?
-
   def new_address
-  "#{name} #{capital}"
+    "#{name}, #{capital}"
   end
 
   def index
