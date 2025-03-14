@@ -5,7 +5,7 @@
 }
 
 .details-card {
-  background-color: white;
+  background-color: #191919;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin-top: 40px;
   padding: 45px;
@@ -24,6 +24,9 @@
 
 .title-country, .description-country {
   margin: 25px;
+}
+
+.resources-tag{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -58,11 +61,16 @@
 // Bonton réserver
 
 .btn-reserver {
-  background: black;
+  background: #7bdcb5;
   border: solid;
   border-radius: 15px;
   padding: 15px;
+  color: #212529;
+}
+
+.btn-reserver :hover {
   color: white;
+  background-color: #212529;
 }
 
 // Form
@@ -74,10 +82,10 @@
 // Bouton confirmer du form réservation
 
 .btn-confirmation {
-  background-color: #28a745; /* Vert */
+  background-color: #28a745;
   color: white;
   padding: 10px 15px;
-  border: none;
+  border: 0.5px solid #171414;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -87,9 +95,10 @@
 // Bouton retour sur index
 
 .btn-suggest a {
-  color: black;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   border: 1px, solid, black;
+  background: black;
   display: inline-block;
   border-radius: 10px;
   padding: 10px;
@@ -98,7 +107,7 @@
 }
 
 .btn-suggest a:hover {
-  background-color: rgb(0, 0, 0);
-  border: 1px, solid, rgb(0, 0, 0);
+  background-color: #191919;
+  border: 1px, solid, #191919;
   color: white;
 }

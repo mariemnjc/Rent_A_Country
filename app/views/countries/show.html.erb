@@ -1,6 +1,6 @@
 <div class="container" >
   <div class="details-card">
-    <%= image_tag @country.image.variant(resize_to_fill: [500, 1000]), class: "rounded", width: 1000, height: 500 %>
+    <%= cl_image_tag @country.image.variant(resize_to_fill: [500, 1000]), class: "rounded", width: 1000, height: 500 %>
     <div class="title-country">
       <h1><%= @country.name %></h1>
       <div class="resources-tag flex-nowrap overflow-auto">
