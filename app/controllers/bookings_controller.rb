@@ -1,5 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:update]
+  before_action :authenticate_user!, only: [:create, :edit, :update, :my_reservations]
+
 
   def index
     countries = Country.where(user_id: current_user.id)
@@ -22,7 +24,7 @@ class BookingsController < ApplicationController
     @booking.country = @country
     @booking.user = @user
     if @booking.save
-      redirect_to profil_bookings_path
+      redirect_to profil_bookings_path, notice: "Réservation créée avec succès !"
     else
       render "countries/show", status: :unprocessable_entity
     end
@@ -42,7 +44,7 @@ class BookingsController < ApplicationController
   end
 
   def my_reservations
-    @bookings = current_user.bookings.includes(:country) # Charge les pays associés pour éviter les requêtes N+1
+    @bookings = current_user.bookings.includes(:country)
   end
 
   private
