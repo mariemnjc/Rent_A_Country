@@ -1,23 +1,28 @@
-// Graphical variables
+// 🌍 Variables Graphiques
 @import "config/fonts";
 @import "config/colors";
 @import "config/bootstrap_variables";
 
-
-// External libraries
+// 🎯 Bibliothèques externes
 @import "bootstrap";
 @import "font-awesome";
 
-// Your CSS partials
+// 📌 Partials CSS
 @import "components/index";
 @import "pages/index";
 @import "countries_show.css";
 @import "card.css";
 
-// Importing Components
+// 📦 Composants spécifiques
 @import "card";
-
 @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+
+// 📌 Styles globaux
+body {
+  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+  color: #f8f9fa;
+  font-family: 'Inter', sans-serif;
+}
 
 // Importing layouts
 // @import "countries";
@@ -39,6 +44,7 @@
   overflow-y: auto;
 }
 
+// 🟢 Scroll horizontal pour les ressources
 .resource-scroll-container {
   display: flex;
   overflow-x: auto;
@@ -48,36 +54,699 @@
   white-space: nowrap;
 }
 
+// 🎯 Boutons filtres de ressources
 .resource-filter {
   min-width: 100px;
   text-align: center;
   padding: 8px;
   border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
 }
 
-.emoji {
-  display: block;
-  font-size: 24px;
+/* Effet hover & actif */
+.resource-filter:hover,
+.resource-filter:focus,
+.resource-filter:active {
+  background: #7bdcb5 !important;
+  color: white !important;
+  border-color: #7bdcb5 !important;
 }
 
 .scroll-btn {
+  --bs-btn-bg: transparent !important; /* Fond transparent */
+  --bs-btn-border-color: transparent !important; /* Bordure transparente */
+  --bs-btn-hover-border-color: #9B5DE5 !important; /* Violet néon */
+  --bs-btn-color: #9B5DE5 !important; /* Couleur du texte / icône en violet néon */
+  --bs-btn-hover-bg: #1B253A !important; /* Fond bleu nuit au hover */
+
+  border-radius: 50%;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1); /* Effet d'agrandissement */
+    box-shadow: 0 0 8px rgba(155, 93, 229, 0.5); /* Glow effet violet */
+  }
+}
+
+// 🌌 NAVBAR Futuriste
+.custom-navbar {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-brand {
+  color: #f8f9fa !important;
+  font-weight: bold;
+}
+
+.navbar-brand-logo {
+  filter: drop-shadow(0 0 10px rgba(123, 220, 181, 0.5));
+}
+
+// 🟢 Liens navbar & animations
+.nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: #7bdcb5 !important;
+}
+
+// 🌍 Style des titres de continent (ALIGNÉ À GAUCHE)
+.text-neon {
+  color: #7bdcb5;
+  text-shadow: 0 0 8px rgba(123, 220, 181, 0.8);
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+// 👤 Avatar Utilisateur
+.avatar-border {
+  border: 2px solid #7bdcb5;
+  box-shadow: 0 0 10px rgba(123, 220, 181, 0.5);
+}
+
+// 🎬 Scroll horizontal façon Netflix
+.country-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #7bdcb5 #121826;
+  display: flex;
+  justify-content: flex-start;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #7bdcb5;
+    border-radius: 10px;
+  }
+}
+
+// 🟢 Design des cards futuristes (taille réduite, bouton fixé en bas, m-4)
+.country-card {
+  background: #1b263b;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(123, 220, 181, 0.4);
+  padding: 15px;
+  width: 180px;
+  height: 280px;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
+  margin: 0 16px; /* Ajout de m-4 */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(123, 220, 181, 0.7);
+    z-index: 10;
+  }
+}
+
+// 🎯 Badges ressources (emoji bien visible à gauche)
+
+.resource-badges {
+  display: flex;
+  gap: 5px;
+  margin: 4px;
+}
+
+.resource-tag {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  width: auto;
+}
+.resource-text {
+  overflow: hidden;
+  opacity: 0;
+  width:0,
+}
+.resource-text:hover {
+  overflow: visible;
+  opacity: 1;
+  width: auto; /* Agrandit pour afficher le texte */
+  padding: 6px 12px;
+}
+
+
+// 👤 Style Président (taille réduite conservée)
+.president-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #7bdcb5;
+}
+
+// 🚀 Bouton "Louer ce pays" fixé en bas
+.btn-rent {
+  background: #7bdcb5;
   border: none;
+  color: #1b263b;
+  font-weight: bold;
+  font-size: 12px; /* Réduction de la taille */
+  padding: 5px 8px; /* Réduction */
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  width: 100%; /* Fixé en bas */
+
+  &:hover {
+    background: #5cbf9c;
+    transform: scale(1.05);
+  }
+}
+
+// 🔍 Search bar futuriste
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+}
+
+.search-form {
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  background: rgba(27, 37, 58, 0.8); // Fond sombre légèrement transparent
+  border: 2px solid #7bdcb5; // Bordure néon
+  border-radius: 30px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-wrapper:hover {
+  box-shadow: 0 0 12px #7bdcb5; // Effet néon au survol
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-button {
   background: none;
-  font-size: 20px;
+  border: none;
+  color: #7bdcb5;
+  font-size: 18px;
   cursor: pointer;
+  padding: 10px;
+  transition: transform 0.2s ease-in-out;
 }
 
-.scroll-btn:hover {
-  color: #007bff;
+.search-button:hover {
+  transform: scale(1.2);
 }
 
-.resource-filter {
-  outline: none !important;
-  box-shadow: none !important; /* Supprime tout effet d'ombre autour */
+
+// Formulaires
+/* 🌌 Conteneur principal */
+.container.p-5 {
+  background: rgba(27, 37, 58, 0.9); /* Fond sombre avec opacité */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(123, 220, 181, 0.3);
 }
 
-.resource-filter:focus,
-.resource-filter:active {
-  outline: none !important;
-  box-shadow: none !important;
+/* 🎯 Titres */
+h1 {
+  color: #7bdcb5;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(123, 220, 181, 0.8);
+}
+
+/* 🏆 Champs du formulaire */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8f9fa;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #7bdcb5;
+  box-shadow: 0 0 10px rgba(123, 220, 181, 0.5);
+}
+
+/* 🔽 Dropdown */
+#resource-dropdown-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #f8f9fa;
+  transition: all 0.3s ease-in-out;
+}
+
+#resource-dropdown-btn:hover,
+#resource-dropdown-btn:focus {
+  background: rgba(123, 220, 181, 0.2);
+  border-color: #7bdcb5;
+}
+
+.dropdown-menu {
+  background: rgba(27, 37, 58, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #f8f9fa;
+}
+
+/* 🎛️ Boutons checkbox */
+.form-check-input {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.form-check-input:checked {
+  background-color: #7bdcb5;
+  border-color: #7bdcb5;
+}
+
+/* 🚀 Bouton principal */
+.btn-primary {
+  background: #7bdcb5;
+  border: none;
+  color: #1b263b;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: #5cbf9c;
+  transform: scale(1.05);
+}
+
+
+//reservation
+
+/* 🌌 Conteneur principal */
+.reservations-container {
+  background: rgba(27, 37, 58, 0.9); /* Fond sombre avec opacité */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(123, 220, 181, 0.3);
+  max-width: 900px;
+  margin: auto;
+}
+
+/* 🎯 Titres */
+h1 {
+  color: #7bdcb5;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(123, 220, 181, 0.8);
+}
+
+/* 🏆 Table stylisée */
+.table {
+  width: 100%;
+  background: transparent; /* Fond transparent */
+  color: #f8f9fa;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(123, 220, 181, 0.3);
+}
+
+.table th {
+  background: rgba(27, 37, 58, 0.9); /* Fond semi-transparent pour les en-têtes */
+  color: #7bdcb5;
+  text-transform: uppercase;
+  padding: 15px;
+  text-align: left;
+}
+
+/* 🚀 Cellules du corps du tableau */
+.table td {
+  background: transparent !important; /* Assure la transparence du fond */
+  color: rgba(255, 255, 255, 0.9); /* Texte légèrement blanc pour le contraste */
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Bordure subtile */
+}
+
+/* 🟢 Lignes hover */
+.table tbody tr:hover {
+  background: rgba(123, 220, 181, 0.2); /* Effet néon au survol */
+  transition: all 0.3s ease-in-out;
+}
+
+/* 📌 Liens */
+.table td a {
+  color: #7bdcb5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.table td a:hover {
+  text-decoration: underline;
+  color: #5cbf9c;
+}
+
+/* 🚀 Message "Aucune réservation" */
+.no-reservation {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+
+// Home Page
+/* 🌌 Conteneur principal */
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 0 10%;
+  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+}
+
+/* 🏆 Section Texte (à gauche) */
+.home-content {
+  max-width: 50%;
+  text-align: left;
+}
+
+/* 🌍 Image (à droite) */
+.home-image {
+  max-width: 40%;
+}
+
+.home-logo {
+  width: 350px;
+  filter: drop-shadow(0 0 15px rgba(123, 220, 181, 0.8));
+}
+
+/* 🏆 Titre */
+.home-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #7bdcb5;
+  text-shadow: 0 0 10px rgba(123, 220, 181, 0.9);
+}
+
+/* 📌 Sous-titre */
+.home-subtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 10px;
+}
+
+/* 🚀 Call to Action */
+.cta-container {
+  margin-top: 30px;
+}
+
+/* 🟢 Bouton néon */
+.btn-neon {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #7bdcb5;
+  color: #1b263b;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(123, 220, 181, 0.5);
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+}
+
+.btn-neon:hover {
+  background: #5cbf9c;
+  box-shadow: 0 0 20px rgba(123, 220, 181, 0.8);
+  transform: scale(1.05);
+}
+
+/* 🌌 Lumière dynamique qui suit la souris */
+.light-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(123, 220, 181, 0.4) 10%, transparent 50%);
+  mix-blend-mode: overlay;
+  transition: transform 0.1s ease-out;
+}
+
+
+/* 🎭 Page Profil */
+.profile-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: #1b253a;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(123, 220, 181, 0.3);
+}
+
+/* 📸 Avatar et Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-lg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #7bdcb5;
+  box-shadow: 0 0 10px rgba(123, 220, 181, 0.5);
+}
+
+.profile-info h2 {
+  font-size: 1.8rem;
+  color: #7bdcb5;
+  margin-bottom: 5px;
+}
+
+/* 🔥 Ressources & Revenus */
+.resources-section {
+  margin-top: 20px;
+}
+
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.resource-icon {
+  font-size: 1.5rem;
+}
+
+.resource-bar {
+  flex-grow: 1;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #7bdcb5;
+  transition: width 0.5s ease-in-out;
+}
+
+.amount {
+  font-weight: bold;
+  color: #7bdcb5;
+}
+
+/* pour le user */
+/* 🌌 Conteneur du profil */
+.profile-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: rgba(27, 37, 58, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(123, 220, 181, 0.3);
+  color: #f8f9fa;
+  text-align: center;
+}
+
+/* 🖼️ Avatar */
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #7bdcb5;
+  box-shadow: 0 0 10px rgba(123, 220, 181, 0.7);
+  margin-bottom: 15px;
+}
+
+/* 📛 Nom */
+.profile-name {
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(123, 220, 181, 0.8);
+}
+
+/* 📧 Email */
+.profile-email {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+/* 🔧 Bouton Modifier le Profil */
+.btn-edit-profile {
+  display: inline-block;
+  background: #7bdcb5;
+  color: #1b263b;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(123, 220, 181, 0.7);
+}
+
+.btn-edit-profile:hover {
+  background: #5cbf9c;
+  transform: scale(1.05);
+}
+
+/* 💰 Revenus mensuels */
+.revenues-container {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.revenues-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #7bdcb5;
+  text-shadow: 0 0 10px rgba(123, 220, 181, 0.7);
+}
+
+.revenue-item {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.resource-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.revenue-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #7bdcb5;
+  transition: width 0.5s ease-in-out;
+}
+
+.amount {
+  font-size: 20px;
+  color: #7bdcb5;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* 🌍 Pays producteurs */
+.countries-list {
+  font-size: 14px;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+/* 🏦 Solde en banque */
+.bank-container {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.bank-title {
+  font-size: 24px;
+  color: #7bdcb5;
+  text-shadow: 0 0 10px rgba(123, 220, 181, 0.7);
+}
+
+.bank-balance, .bank-forecast {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f8f9fa;
+  margin-bottom: 5px;
+}
+
+/* ➕ Ajouter des Bitcoins */
+.btn-add-btc {
+  display: block;
+  text-align: center;
+  background: #ffcc00;
+  color: #1b263b;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  margin-top: 10px;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
+}
+
+.btn-add-btc:hover {
+  background: #e6b800;
+  transform: scale(1.05);
 }

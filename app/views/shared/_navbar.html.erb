@@ -1,52 +1,69 @@
-<!-- Navbar -->
-<!-- Section header + profil -->
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon $">
-  <div class="container-fluid m-1">
-    <%= link_to countries_path, class: "navbar-brand" do %>
-      <%= cl_image_tag "logo_rent_country_ovzviv.png",
+<!-- 🌌 Navbar Dark Futuriste -->
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+  <div class="container-fluid">
+    <!-- 🌍 Logo & Nom -->
+    <a class="navbar-brand d-flex align-items-center" href="<%= countries_path %>">
+      <%= cl_image_tag "cm31sf1v7mml3kup4j3huf7ud57n",
             alt: "FrontierX Logo",
-            class: "navbar-brand-logo me-2",
-            width: 100 %>
-      <span class="fs-4 fw-bold">Rent A Country</span>
-    <% end %>
-  </div>
-    <button class="navbar-toggler m-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            class: "rounded-circle navbar-brand-logo me-2",
+            width: 60 %>
+      <span class="fs-3 fw-bold text-neon">Rent A Country</span>
+    </a>
+
+    <!-- 📌 Bouton Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse m-1" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto d-flex align-items-center">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "Mes Réservations", my_reservations_path, class: "nav-link text-nowrap" %>
-          </li>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <!-- 🔍 Barre de recherche futuriste -->
+      <div class="mx-auto">
+        <%= form_with url: countries_path, method: :get, local: true, class: "search-form" do %>
+          <div class="search-wrapper">
+            <%= text_field_tag :query, params[:query], class: "search-input", placeholder: "🔍 Rechercher un pays..." %>
+            <button type="submit" class="search-button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        <% end %>
+      </div>
 
-          <!-- Avatar + Profil -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <!-- 🏠 Liens de Navigation -->
+      <ul class="navbar-nav d-flex align-items-center ms-auto">
+        <li class="nav-item">
+          <%= link_to "Mes Réservations", my_reservations_path, class: "nav-link neon-hover me-3" %>
+        </li>
+
+        <!-- 🔽 Avatar + Menu Profil -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <% if user_signed_in? %>
               <% if current_user.avatar.attached? %>
-                <%= image_tag current_user.avatar.variant(resize_to_fill: [40, 40]), class: "rounded-circle me-2", width: 40, height: 40 %>
+                <%= image_tag current_user.avatar.variant(resize_to_fill: [40, 40]), class: "rounded-circle avatar-border", width: 40, height: 40 %>
               <% else %>
-                <%= image_tag "default_avatar.png", class: "rounded-circle me-2", width: 40, height: 40 %>
+                <%= image_tag "default_avatar.png", class: "rounded-circle avatar-border", width: 40, height: 40 %>
               <% end %>
-              <span><%= current_user.name %></span>
-            </a>
+              <span class="text-neon ms-2"><%= current_user.name %></span>
+            <% else %>
+              <%= image_tag "default_avatar.png", class: "rounded-circle avatar-border", width: 40, height: 40 %>
+              <span class="text-neon ms-2">Invité</span>
+            <% end %>
+          </a>
 
-            <!-- Dropdown menu -->
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+          <!-- 🎛️ Dropdown Menu -->
+          <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+            <% if user_signed_in? %>
+              <%= link_to "Mon Profil", user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Tableau de bord", profil_bookings_path, class: "dropdown-item" %>
               <%= link_to "Créer un pays", new_country_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "nav-link" %>
-            </div>
-          </li>
-
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Se connecter", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
+              <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item text-danger" %>
+            <% else %>
+              <%= link_to "Se connecter", new_user_session_path, class: "dropdown-item" %>
+            <% end %>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
-</div>
+</nav>

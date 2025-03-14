@@ -83,4 +83,5 @@ group :test do
 end
 
 gem "cloudinary", "~> 2.3"
+gem "activestorage-cloudinary-service"
 gem "geocoder"

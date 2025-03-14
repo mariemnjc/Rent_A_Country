@@ -12,14 +12,16 @@ Rails.application.routes.draw do
   resources :countries, except: [:destroy] do
     resources :bookings, only: %i[create edit update]
   end
-  resources :users, only: %i[profil]
-    # resources :bookings, only: %i[index show new create edit update]
-  # end
 
-  # Ajout de la route pour le profil des réservations pas possible avec resources ⚠️
+  # Route pour le profil utilisateur
+  resources :users, only: [:show]
+  get "/profil/:id", to: "users#show", as: :user_profile
+
+  # Route pour le dashboard et les réservations sur mes pays
   get "/profil/bookings", to: "pages#profil", as: :profil_bookings
   resources :bookings, only: [:destroy]
 
+  # Route pour les réservations demandés en tant qu'utilisateur
   get "/mes_reservations", to: "bookings#my_reservations", as: :my_reservations
 
 end

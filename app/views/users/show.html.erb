@@ -1,0 +1,39 @@
+<div class="profile-container">
+  <!-- 🖼️ Photo de profil -->
+  <div class="profile-header">
+    <%= image_tag current_user.avatar.attached? ? current_user.avatar.variant(resize_to_fill: [150, 150]) : "default_avatar.png",
+      class: "profile-avatar" %>
+
+    <h2 class="profile-name"><%= current_user.name %></h2>
+    <p class="profile-email"><%= current_user.email %></p>
+
+    <!-- 🔧 Modifier le profil -->
+    <%= link_to "Modifier mon profil", edit_user_registration_path, class: "btn btn-edit-profile" %>
+  </div>
+
+  <!-- 💰 Revenus mensuels -->
+  <div class="revenues-container">
+    <h3 class="revenues-title">💰 Revenus Mensuels en Bitcoin</h3>
+    <div class="revenues-list">
+      <% @resources.each do |resource, amount| %>
+        <div class="revenue-item">
+          <span class="resource-name">🚀 <%= resource %></span>
+          <div class="revenue-bar">
+            <div class="bar-fill" style="width: <%= (amount / 2.0) %>%;"></div>
+          </div>
+          <span class="amount">₿ <%= number_with_delimiter(amount, delimiter: ' ') %> / mois</span>
+          <p class="countries-list">Pays producteurs: <%= @resource_countries[resource].join(", ") %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- 💰💎 Total en banque & Forecast -->
+  <div class="bank-container">
+    <h3 class="bank-title">🏦 Mon Solde</h3>
+    <p class="bank-balance">Actuel: <strong>₿ <%= number_with_delimiter(@bank_balance, delimiter: ' ') %></strong></p>
+    <p class="bank-forecast">Prévision N+1: <strong>₿ <%= number_with_delimiter(@bank_balance + @forecast_next_month, delimiter: ' ') %></strong></p>
+
+    <%= link_to "➕ Ajouter des Bitcoins", "#", class: "btn btn-add-btc" %>
+  </div>
+</div>
