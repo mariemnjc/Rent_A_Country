@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   end
 
   # Route pour le profil utilisateur
-  resources :users, only: [:show]
-  get "/profil/:id", to: "users#show", as: :user_profile
+  resources :users, only: [:show,  :edit, :update]
+  get "/profil/:id", to: "pages#profil", as: :user_profile
 
   # Route pour le dashboard et les réservations sur mes pays
   get "/profil/bookings", to: "pages#profil", as: :profil_bookings
