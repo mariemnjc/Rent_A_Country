@@ -10,3 +10,35 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+/* Ajuste l'alignement des éléments dans la navbar */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Ajoute un espace entre le logo et le texte */
+}
+
+.navbar-brand span {
+  font-size: 4rem; /* Augmente la taille du texte */
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(123, 220, 181, 0.8);
+  white-space: nowrap; /* Évite le retour à la ligne */
+}
+
+.navbar-brand-logo {
+  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.nav-link.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Ajoute un petit espace entre l'avatar et le texte */
+}
+
+.text-neon {
+  display: flex;
+  align-items: center;
+}
