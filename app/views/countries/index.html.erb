@@ -1,5 +1,5 @@
 <!-- 🌍 Bandeau des filtres de ressources avec scroll horizontal -->
-<div class="container-fluid mt-3">
+<div id="resources" class="container-fluid mt-3">
   <div class="d-flex align-items-center">
     <!-- Flèche gauche -->
     <button class="scroll-btn left btn btn-light me-2"><i class="fas fa-chevron-left"></i></button>
@@ -16,50 +16,55 @@
 </div>
 
 <!-- 🌎 Section des pays organisés par continent -->
-<div class="container mt-4">
-  <% @countries.group_by(&:continent).each do |continent, countries| %>
-    <div class="continent-section">
-      <h2 class="text-neon"><%= continent %></h2>
+<div class="container-fluid mt-4 px-md-4">
+  <div class="row">
+      <div class="col-md-6">
+        <% @countries.group_by(&:continent).each do |continent, countries| %>
+          <div class="continent-section">
+            <h2 class="text-neon"><%= continent %></h2>
+              <!-- 🌍 Conteneur scrollable -->
+              <div class="country-scroll-container">
+                <% countries.each do |country| %>
+                  <div class="country-card m-4">
+                    <% if country.image.attached? %>
+                      <%= cl_image_tag country.image.key, class: "card-img-top rounded", alt: country.name %>
+                    <% else %>
+                      <img src="http://kitt.lewagon.com/placeholder/cities/rio" class="card-img-top rounded" alt="<%= country.name %>">
+                    <% end %>
 
-      <!-- 🌍 Conteneur scrollable -->
-      <div class="country-scroll-container">
-        <% countries.each do |country| %>
-          <div class="country-card m-4">
-            <% if country.image.attached? %>
-              <%= cl_image_tag country.image.key, class: "card-img-top rounded", alt: country.name %>
-            <% else %>
-              <img src="http://kitt.lewagon.com/placeholder/cities/rio" class="card-img-top rounded" alt="<%= country.name %>">
-            <% end %>
+                    <div class="d-flex align-items-center mt-2">
+                      <%= image_tag country.user.avatar.attached? ? country.user.avatar.variant(resize_to_fill: [35, 35]) : "default_avatar.png", class: "president-avatar me-2" %>
+                      <h5 class="text-white mb-0"><%= country.name %></h5>
+                    </div>
 
-            <div class="d-flex align-items-center mt-2">
-              <%= image_tag country.user.avatar.attached? ? country.user.avatar.variant(resize_to_fill: [35, 35]) : "default_avatar.png", class: "president-avatar me-2" %>
-              <h5 class="text-white mb-0"><%= country.name %></h5>
-            </div>
+                    <p class="text-white-50 mt-2">💰 <strong><%= number_to_currency(country.price, unit: "€") %></strong></p>
 
-            <p class="text-white-50 mt-2">💰 <strong><%= number_to_currency(country.price, unit: "€") %></strong></p>
-
-            <div class="resource-badges">
-              <% country.resources.first(3).each do |resource| %>
-                <span class="resource-tag">
-                <span class="resource-emoji"><%= ApplicationHelper::RESOURCE_EMOJIS[resource] %></span>
-                <span class="resource-text"><%= resource %></span>
-                </span>
-              <% end %>
-            </div>
+                    <div class="resource-badges">
+                      <% country.resources.first(3).each do |resource| %>
+                        <span class="resource-tag">
+                          <span class="resource-emoji"><%= ApplicationHelper::RESOURCE_EMOJIS[resource] %></span>
+                          <span class="resource-text"><%= resource %></span>
+                        </span>
+                      <% end %>
+                    </div>
 
 
-            <%= link_to "Investir", country_path(country), class: "btn btn-rent mt-auto" %>
+                    <%= link_to "Investir", country_path(country), class: "btn btn-rent mt-auto" %>
+                  </div>
+                <% end %>
+              </div>
           </div>
         <% end %>
       </div>
+
+    <div class="col-md-6">
+      <div class="mapbox-container">
+        <div class ="mapbox" style="width: 100%; height: 600px;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
     </div>
-
-    <div style="width: 100%; height: 600px;"
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   </div>
-
-  <% end %>
-
 </div>
