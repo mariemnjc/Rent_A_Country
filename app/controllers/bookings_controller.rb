@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
     @booking.country = @country
     @booking.user = @user
     if @booking.save
-      redirect_to profil_bookings_path
+      redirect_to profil_bookings_path, notice: "Réservation créée avec succès !"
     else
       render "countries/show", status: :unprocessable_entity
     end
